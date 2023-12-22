@@ -1,0 +1,50 @@
+/* Ajoutez ici vos styles personnalisés ou remplacez les styles Tailwind existants */
+
+/* Gradiant violet */
+.bg-gradient-to-r {
+    background: linear-gradient(to right, #8a63d2, #5a3da4);
+    overflow: hidden;
+}
+
+/* Navbar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5; /* Ajout de z-index pour que la barre de navigation soit au-dessus du contenu */
+    background-color: rgba(90, 61, 164, 0.9); /* Couleur de fond avec transparence */
+    backdrop-filter: blur(10px); /* Effet flou pour améliorer la transparence */
+}
+
+/* Styles pour la navbar */
+nav h1 {
+    color: white;
+}
+
+/* Carte pour les inputs avec ombre */
+.rounded-md {
+    border-radius: 0.375rem; /* Ajustez selon vos préférences */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Focus Ring */
+.focus\:ring {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+/* Ajoutez ici vos styles personnalisés ou remplacez les styles Tailwind existants */
+
+/* Gradiant violet */
+.bg-gradient-to-r {
+    background: linear-gradient(to right, #8a63d2, #5a3da4);
+}
+
+
+/* Footer */
+footer {
+    background-color: rgba(90, 61, 164, 0.9);
+}
+
