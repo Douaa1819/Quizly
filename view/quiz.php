@@ -88,7 +88,7 @@
             }
         }
     </script>
- <script src="./play.js"></script>
+ <script src="../js/play.js"></script>
 </body>
 
 </html>
