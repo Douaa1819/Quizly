@@ -13,7 +13,12 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-center bg-no-repeat bg-cover" style="background-image: url('../img/image.jpg');">
+<nav class="bg-transparent">
+        <div>
+            <img src="../img/logo.png" alt="logo" width="150px" height="100px">
+        </div>
+    </nav>
     <?php
     if (isset($_SESSION['pseudo'])) {
         $pseudo = $_SESSION['pseudo'];
@@ -24,6 +29,7 @@
     ?>
 <div id="countdown" class=" mx-auto text-9xl font-extralight text-center "></div>
     </div>
+   
     <section id="questionContent" class="container" style="display : none;">
         <div class="QuizSection">
             <p class="text-lg font-semibold mb-4"> Question 1 of 10 </p>
@@ -60,10 +66,7 @@
         </a>
     </section>
 
-    <footer id="footer">
-        <p>Privacy Policy</p>
-        <p>Terms of Service</p>
-    </footer>
+ 
 
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
     <script src="../js/quizjs.js"></script>

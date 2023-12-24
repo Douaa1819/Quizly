@@ -50,14 +50,13 @@
         }
 
         .answer-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.01);
         }
 
         a {
             display: none;
-            background-color: #4b2e83;
-            color: #fff;
-            padding: 15px 30px;
+            background-color: #3b1b79;
+            color: #fff;            padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
             margin-top: 20px;
@@ -65,18 +64,10 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease-in-out;
             margin-left: 16px;
-           margin-right: 16px;
         }
 
         a:hover {
-            background-color: #6c4aa5;
+            background-color: #6d43b4;
         }
 
-        footer {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: end;
-            background-color: #f8f9fa; 
-          
-        }
+      
