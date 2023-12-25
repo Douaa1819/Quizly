@@ -1,4 +1,4 @@
-var countdownDuration = 5;
+var countdownDuration = 1;
 
 function updateCountdown() {
     document.getElementById('countdown').innerText = countdownDuration;
@@ -20,13 +20,11 @@ function startCountdown() {
 
     }, 1000); 
 
- 
 }
 window.onload = startCountdown;
 document.addEventListener('DOMContentLoaded', function () {
     var answerRadios = document.querySelectorAll('.answer-radio');
     var nextButton = document.getElementById('next');
-
     answerRadios.forEach(function (radio) {
         radio.addEventListener('change', function () {
             nextButton.style.display = 'block';

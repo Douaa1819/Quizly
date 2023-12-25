@@ -1,13 +1,17 @@
+
 <?php
 session_start();
+
 if (isset($_POST['submit'])) {
-    $_SESSION['pseudo'] = $_POST['pseudo'];
-    if (isset($_SESSION['pseudo'])) {
-        header('location:quiz.php');
+    $pseudo = $_POST['pseudo'];
+
+    if (!empty($pseudo)) {
+        $_SESSION['pseudo'] = $pseudo;
+        header('location: quiz.php');
+        exit();
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

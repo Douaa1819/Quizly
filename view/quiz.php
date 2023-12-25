@@ -18,19 +18,15 @@ session_start();
 </head>
 
 <body class="bg-center bg-no-repeat bg-cover" style="background-image: url('../img/image.jpg');">
-<nav class="bg-transparent">
-        <div>
-            <img src="../img/logo.png" alt="logo" width="150px" height="100px">
-        </div>
     </nav>
     <?php
-    if (isset($_SESSION['pseudo'])) {
-        $pseudo = $_SESSION['pseudo'];
-        echo "<p>Hy  $pseudo</p>";
-    } else {
-        echo "<p> mkynch.</p>";
-    }
-    ?>
+if (isset($_SESSION['pseudo'])) {
+    $pseudo = $_SESSION['pseudo'];
+    echo "<p style='color: white; font-size: 22px; font-weight: bold;'>Let's GOOO $pseudo !</p>";
+} else {
+    echo "<p style='color: red; font-size: 18px; font-weight: bold;'>mkynch.</p>";
+}
+?>
 <div id="countdown" class=" mx-auto text-9xl font-extralight text-center "></div>
     </div>
     <section id="questionContent" class="container" style="display : none;">
