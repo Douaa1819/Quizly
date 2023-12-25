@@ -1,10 +1,13 @@
 <?php
 require_once "../controller/questioncontroller.php";
-$objectQuestion=new QuestionControlle();
+
+$questionNumber = isset($_GET['q']) ? (int)$_GET['q'] : 1;
+
+$objectQuestion = new QuestionControlle();
+$questionText = $objectQuestion->getQuesController($questionNumber);
 
 session_start();
-   
-     ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +34,9 @@ if (isset($_SESSION['pseudo'])) {
     </div>
     <section id="questionContent" class="container" style="display : none;">
         <div class="QuizSection">
-            <p class="text-lg font-semibold mb-4"> Question 1/10 </p>
-            <h1 class="text-2xl font-bold mb-6">
-            <?php echo $objectQuestion->getQuesController(2); ?>?
+            <p class="text-lg font-semibold mb-4">Question <?php echo $questionNumber; ?>/10 </p>
+            <h1 id="questionText" class="text-2xl font-bold mb-6">
+            <?php echo $questionText; ?>?
             </h1>
         </div>
 
@@ -59,36 +62,68 @@ if (isset($_SESSION['pseudo'])) {
         </div>
     </div>
 </div>
-        <a href="#" id="start" onclick="showNextButton()" class="mt-4">
-            Next
-        </a>
+         <!-- Add the Next button with the id 'nextButton' -->
+         <button id="nextButton" onclick="showNextQuestion()" class="mt-4" style="display: none;">Next</button>
     </section>
-
 
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
     <script src="../js/quizjs.js"></script>
+    <script src="../js/play.js"></script>
 
     <script>
-        function showNextButton() {
-            var checkboxes = document.querySelectorAll('input[name="answer"]');
-            var nextButton = document.getElementById('start');
-            var isChecked = false;
+    function showNextButton() {
+        var checkboxes = document.querySelectorAll('input[name="answer"]');
+        var nextButton = document.getElementById('nextButton');
+        var isChecked = false;
 
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].checked) {
-                    isChecked = true;
-                    break;
-                }
-            }
-
-            if (isChecked) {
-                nextButton.style.display = 'inline-block';
-            } else {
-                nextButton.style.display = 'none';
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                isChecked = true;
+                break;
             }
         }
-    </script>
- <script src="../js/play.js"></script>
-</body>
 
+        if (isChecked) {
+            nextButton.style.display = 'inline-block';
+        } else {
+            nextButton.style.display = 'none';
+        }
+    }
+
+    var currentQuestion = <?php echo $questionNumber; ?>;
+    var totalQuestions = 10;
+
+    function showNextQuestion() {
+        var selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        var nextButton = document.getElementById('nextButton');
+
+        if (selectedAnswer) {
+            currentQuestion++;
+            fetchQuestionText(currentQuestion);
+            nextButton.style.display = 'none';
+        } else {
+            alert('Please select an answer before proceeding to the next question.');
+        }
+    }
+
+    function fetchQuestionText(questionNumber) {
+        fetch('fetch_question.php?q=' + questionNumber)
+            .then(response => response.text())
+            .then(data => {
+                var questionNumberElement = document.getElementById('questionNumber');
+                questionNumberElement.textContent = 'Question ' + questionNumber + '/' + totalQuestions;
+
+                var questionTextElement = document.getElementById('questionText');
+                questionTextElement.textContent = data;
+
+                var nextButton = document.getElementById('nextButton');
+                nextButton.style.display = 'inline-block';
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Initial load of the first question
+    fetchQuestionText(currentQuestion);
+</script>
+</body>
 </html>
