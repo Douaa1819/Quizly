@@ -19,12 +19,11 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="bg-center bg-no-repeat bg-cover" style="background-image: url('../img/image.jpg');">
->
     <div class="flex items-center justify-center min-h-screen">
         <div class="bg-black bg-opacity-40 p-8 rounded-md shadow-md w-full max-w-md">
             <div class="relative">
-                <img src="../img/logo.png" alt=""
-                    class="w-58 h-48 object-center object-cover rounded-md shadow-md mb-4">
+                <img src="../img/pseudo.jpg" alt="pseudo photos"
+                    class=" flex items-center justify-center w-58 h-48 object-center object-cover rounded-md shadow-md mb-4 mx-7 px-10">
             </div>
             <h1 class="text-3xl font-semibold mb-4 text-center text-white">Testez vos connaissances</h1>
             <form method="post">

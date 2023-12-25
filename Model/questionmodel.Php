@@ -1,33 +1,52 @@
 <?php
 require_once('../config/conn.php');
-class Question{
-private $conn;
-public function __construct()
+
+class Question
 {
-  $newconnect = Database::getInstance()->getConnection();
-  $this->conn=$newconnect;
+    private $conn;
+    private $idQ;
+    private $question;
+    private $idTh;
+
+    public function __get($attribute)
+    {
+        return $this->$attribute;
+    }
+
+    public function __set($attribute, $value)
+    {
+        $this->$attribute = $value;
+    }
+
+    public function __construct()
+    {
+        $newConnect = Database::getInstance()->getConnection();
+        $this->conn = $newConnect;
+    }
+
+
+    public function getQuestion()
+    {
+        $query = "SELECT * FROM question WHERE idQ = :idQ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idQ', $this->idQ, PDO::PARAM_INT);
+        
+        try {
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($result) {
+                $this->idQ = $result['idQ'];
+                $this->question = $result['question'];
+                $this->idTh = $result['idTh'];
+                return true; 
+            } else {
+                return false; 
+            }
+        } catch (PDOException $e) {
+
+            return false;
+        }
+    }
+    
 }
-
-public function getQuestion(){
-    $query="SELECT * FROM question";
-// -- as q WHERE q.idQ NOT IN () ORDER BY RAND() LIMIT 1";
-    $result=$this->conn->query($query);
-    $questions = $result->fetchAll(PDO::FETCH_ASSOC);
-    $_SESSION['questions'] = $questions;
-}
-
-// public function getNextQuestion() {
-//     if (!isset($_SESSION['currentQuestion'])) {
-//         $_SESSION['currentQuestion'] = 0;
-//         } else {
-//             $_SESSION['currentQuestion']++;
-//         }
-
-//         if ($_SESSION['currentQuestion'] >= count($_SESSION['questions'])) {
-//             $_SESSION['currentQuestion'] = 0;
-//         }
-
-//         return $_SESSION['questions'][$_SESSION['currentQuestion']];
-//     }
- }
-
