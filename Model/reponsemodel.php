@@ -2,7 +2,7 @@
 require_once('../config/conn.php');
 class Reponse{
 private $conn;
-private $reponse
+private $reponse;
 public function __construct()
 {
   $newconnect = Database::getInstance()->getConnection();
