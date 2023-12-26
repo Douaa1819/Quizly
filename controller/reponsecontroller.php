@@ -22,8 +22,7 @@ class ReponseControlle
     public function getReController($p)
     {
         $question = new Question();
-        $question->idQ = $p;
-        $question->getQuestion();
+      
         
         // $this->idQ = $question->idQ;
         // $this->question = $question->question;

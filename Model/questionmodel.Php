@@ -25,24 +25,22 @@ class Question
     }
 
 
-    public function getQuestion()
+    public function getAllQuestion()
     {
-        $query = "SELECT * FROM question WHERE idQ = :idQ";
+        $query = "SELECT * FROM question ";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':idQ', $this->idQ, PDO::PARAM_INT);
-        
+         $stmt->execute();
+
+
         try {
             $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-            if ($result) {
-                $this->idQ = $result['idQ'];
-                $this->question = $result['question'];
-                $this->idTh = $result['idTh'];
-                return true; 
-            } else {
-                return false; 
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result){
+                return $result;
+            }else{
+                return false;
             }
+            
         } catch (PDOException $e) {
 
             return false;

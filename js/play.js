@@ -1,4 +1,4 @@
-var countdownDuration = 1;
+var countdownDuration = 0;
 
 function updateCountdown() {
     document.getElementById('countdown').innerText = countdownDuration;

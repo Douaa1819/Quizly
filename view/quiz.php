@@ -1,12 +1,9 @@
 <?php
 require_once "../controller/questioncontroller.php";
-
-$questionNumber = isset($_GET['q']) ? (int)$_GET['q'] : 1;
-
 $objectQuestion = new QuestionControlle();
-$questionText = $objectQuestion->getQuesController($questionNumber);
-
+$question = $objectQuestion->QuestionControlle();
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +31,11 @@ if (isset($_SESSION['pseudo'])) {
     </div>
     <section id="questionContent" class="container" style="display : none;">
         <div class="QuizSection">
-            <p class="text-lg font-semibold mb-4">Question <?php echo $questionNumber; ?>/10 </p>
+            <p class="text-lg font-semibold mb-4">Question/10 </p>
             <h1 id="questionText" class="text-2xl font-bold mb-6">
-            <?php echo $questionText; ?>?
+            <?php
+                echo $question[0]['idQ']."- ".$question[0]['question']."<br>";
+            ?>
             </h1>
         </div>
 
@@ -62,8 +61,8 @@ if (isset($_SESSION['pseudo'])) {
         </div>
     </div>
 </div>
-         <!-- Add the Next button with the id 'nextButton' -->
-         <button id="nextButton" onclick="showNextQuestion()" class="mt-4" style="display: none;">Next</button>
+         
+         <button  type="button" id="nextButton" onclick="showNextQuestion()" class="mt-4 form-radio text-purple-500" style="display: none;">Next</button>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
@@ -75,7 +74,6 @@ if (isset($_SESSION['pseudo'])) {
         var checkboxes = document.querySelectorAll('input[name="answer"]');
         var nextButton = document.getElementById('nextButton');
         var isChecked = false;
-
         for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
                 isChecked = true;
@@ -89,41 +87,18 @@ if (isset($_SESSION['pseudo'])) {
             nextButton.style.display = 'none';
         }
     }
-
-    var currentQuestion = <?php echo $questionNumber; ?>;
-    var totalQuestions = 10;
-
-    function showNextQuestion() {
-        var selectedAnswer = document.querySelector('input[name="answer"]:checked');
-        var nextButton = document.getElementById('nextButton');
-
-        if (selectedAnswer) {
-            currentQuestion++;
-            fetchQuestionText(currentQuestion);
-            nextButton.style.display = 'none';
-        } else {
-            alert('Please select an answer before proceeding to the next question.');
+     function showNextQuestion(){
+     var xml=new XMLHttpRequest();
+     xml.onreadystatechange =function(){
+        if(this.readyState == 4 && status ==200){
+            document.getElementById('questionContent').innerHTML=this.responseText;
         }
-    }
+     }
+     xml.open('GET','../include/fetchquestion.php');
+     xml.send();
+     }
 
-    function fetchQuestionText(questionNumber) {
-        fetch('fetch_question.php?q=' + questionNumber)
-            .then(response => response.text())
-            .then(data => {
-                var questionNumberElement = document.getElementById('questionNumber');
-                questionNumberElement.textContent = 'Question ' + questionNumber + '/' + totalQuestions;
-
-                var questionTextElement = document.getElementById('questionText');
-                questionTextElement.textContent = data;
-
-                var nextButton = document.getElementById('nextButton');
-                nextButton.style.display = 'inline-block';
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-    // Initial load of the first question
-    fetchQuestionText(currentQuestion);
+     
 </script>
 </body>
 </html>
