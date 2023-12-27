@@ -27,7 +27,9 @@ class Question
 
     public function getAllQuestion()
     {
-        $query = "SELECT * FROM question ";
+        $query = "SELECT q.* , t.theme FROM question  q 
+                    JOIN theme t ON t.idTh=q.idTh
+                    ORDER BY RAND()";
         $stmt = $this->conn->prepare($query);
          $stmt->execute();
 

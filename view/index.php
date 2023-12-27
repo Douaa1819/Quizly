@@ -19,17 +19,18 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
     <title>Quizzly</title>
 </head>
 
 <body class="bg-center bg-no-repeat bg-cover" style="background-image: url('../img/image.jpg');">
     <div class="flex items-center justify-center min-h-screen">
-        <div class="bg-black bg-opacity-40 p-8 rounded-md shadow-md w-full max-w-md">
+        <div class="bg-black bg-opacity-40 p-6 rounded-md shadow-md w-full max-w-md">
             <div class="relative">
-                <img src="../img/pseudo.jpg" alt="pseudo photos"
-                    class=" flex items-center justify-center w-58 h-48 object-center object-cover rounded-md shadow-md mb-4 mx-7 px-10">
+                <img src="../img/logo.png" alt="pseudo photos"
+                    class=" flex items-center justify-center w-52 h-48 object-center object-cover rounded-md mb-1 mx-16 ">
             </div>
-            <h1 class="text-3xl font-semibold mb-4 text-center text-white">Testez vos connaissances</h1>
+            <h1 class="text-3xl font-semibold mb-8 text-center text-white">Testez vos connaissances</h1>
             <form method="post">
                 <div class="relative rounded-md overflow-hidden bg-white border-2 border-purple-700 mb-4">
                     <input type="text" id="pseudo" name="pseudo"
