@@ -18,6 +18,10 @@ $i = 0; // Initialiser le compteur
 </head>
 
 <body class="bg-center bg-no-repeat bg-cover" style="background-image: url('../img/image.jpg');">
+
+<div class="w-9/12 mx-auto bg-gray-200 rounded-full h-2.5 my-4 dark:bg-gray-700">
+    <div class="bg-purple-600 h-2.5 rounded-full dark:bg-purple-500" style="width: 66%"></div>
+</div>
     <?php
     if (isset($_SESSION['pseudo'])) {
         $pseudo = $_SESSION['pseudo'];
@@ -25,7 +29,9 @@ $i = 0; // Initialiser le compteur
     } else {
         echo "<p style='color: red; font-size: 18px; font-weight: bold;'>mkynch.</p>";
     }
+    
     ?>
+    
     <div id="countdown" class="mx-auto text-9xl font-extralight text-center"></div>
     <button onclick="nextQuestion()" class="fixed top-0 right-0 mt-4 mr-4 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
     Next
@@ -49,34 +55,45 @@ $i = 0; // Initialiser le compteur
 
     function nextQuestion() {
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("questionContent").innerHTML = this.responseText;
                 var reponseXhttp = new XMLHttpRequest();
-                reponseXhttp.onreadystatechange = function() {
+                reponseXhttp.onreadystatechange = function () {
                     if (reponseXhttp.readyState == 4 && reponseXhttp.status == 200) {
                         document.getElementById("reponse").innerHTML = reponseXhttp.responseText;
                     }
                 };
-                reponseXhttp.open("GET", "../include/fetchreponse.php?id=" + i, true);
+
+                var selectedResponse = document.querySelector('input[name="answer"]:checked');
+                var responseValue = selectedResponse ? selectedResponse.value : '';
+                
+                // Utilisez la même variable i pour obtenir l'ID de la question actuelle
+                reponseXhttp.open("GET", "../include/fetchreponse.php?idQ=" + i + "&response=" + responseValue, true);
                 reponseXhttp.send();
             }
         };
 
         if (i === 0) {
-            xhttp.open("GET", "../include/fetchquestion.php?id=" + i, true);
-            i++;
+            // Utilise la même variable i pour obtenir l'ID de la question actuelle
+            xhttp.open("GET", "../include/fetchquestion.php?idQ=" + i, true);
         } else {
-            xhttp.open("GET", "../include/fetchquestion.php?id=" + i++, true);
+            xhttp.open("GET", "../include/fetchquestion.php?idQ=" + i, true);
         }
         xhttp.send();
+
+        i++;
+
+        if (i > 10) {
+            window.location.href = 'result.php';
+        }
     }
 
-    window.onload = function() {
+    window.onload = function () {
         nextQuestion();
     };
 </script>
+
 
 
 </body>

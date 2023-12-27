@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -24,7 +23,12 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="bg-center bg-no-repeat bg-cover" style="background-image: url('../img/image.jpg');">
+
+<div class="w-9/12 mx-auto bg-gray-200 rounded-full h-2.5 my-4 dark:bg-gray-700">
+    <div class="bg-purple-600 h-2.5 rounded-full dark:bg-purple-500" style="width: 30%"></div>
+</div>
     <div class="flex items-center justify-center min-h-screen">
+        
         <div class="bg-black bg-opacity-40 p-6 rounded-md shadow-md w-full max-w-md">
             <div class="relative">
                 <img src="../img/logo.png" alt="pseudo photos"
