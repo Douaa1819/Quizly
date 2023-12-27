@@ -15,6 +15,13 @@ class ReponsControlle
 
  }
 
+ public function justificationControlle($idQ){
+  $reponse= new Reponse();
+  $result = $reponse->justification($idQ);
+  return $result;
+
+}
+
 
 }
 ?>

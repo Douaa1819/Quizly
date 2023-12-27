@@ -23,6 +23,19 @@ public function getAllReponse($idQ){
     return $reponse ;
 }
 
+
+public function justification($idR){
+  $query = "SELECT (SELECT justification FROM reponse where statut =1 and idQ=(SELECT idQ from reponse where idR=$idR)) FROM reponse where statut =0 and idR =$idR";
+
+  $stmt = $this->conn->prepare($query);
+  $stmt->bindParam(':idR', $idR, PDO::PARAM_INT);
+  $stmt->execute();
+  
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+
 }
 
 

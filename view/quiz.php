@@ -51,49 +51,45 @@ $i = 0; // Initialiser le compteur
     <script src="../js/play.js"></script>
 
     <script>
-    var i = <?php echo $i; ?>;
+        var i = <?php echo $i; ?>;
 
-    function nextQuestion() {
+        function nextQuestion() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("questionContent").innerHTML = this.responseText;
-                var reponseXhttp = new XMLHttpRequest();
-                reponseXhttp.onreadystatechange = function () {
-                    if (reponseXhttp.readyState == 4 && reponseXhttp.status == 200) {
-                        document.getElementById("reponse").innerHTML = reponseXhttp.responseText;
-                    }
-                };
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("questionContent").innerHTML = this.responseText;
+            var reponseXhttp = new XMLHttpRequest();
+            reponseXhttp.onreadystatechange = function () {
+                if (reponseXhttp.readyState == 4 && reponseXhttp.status == 200) {
+                    document.getElementById("reponse").innerHTML = reponseXhttp.responseText;
+                }
+            };
 
-                var selectedResponse = document.querySelector('input[name="answer"]:checked');
-                var responseValue = selectedResponse ? selectedResponse.value : '';
-                
-                // Utilisez la même variable i pour obtenir l'ID de la question actuelle
-                reponseXhttp.open("GET", "../include/fetchreponse.php?idQ=" + i + "&response=" + responseValue, true);
-                reponseXhttp.send();
-            }
-        };
-
-        if (i === 0) {
-            // Utilise la même variable i pour obtenir l'ID de la question actuelle
-            xhttp.open("GET", "../include/fetchquestion.php?idQ=" + i, true);
-        } else {
-            xhttp.open("GET", "../include/fetchquestion.php?idQ=" + i, true);
+            var selectedResponse = document.querySelector('input[name="answer"]:checked');
+            var responseValue = selectedResponse ? selectedResponse.value : ''; 
+            reponseXhttp.open("GET", "../include/fetchreponse.php?id=" + i + "&response=" + responseValue, true);
+            reponseXhttp.send();
         }
-        xhttp.send();
-
-        i++;
-
-        if (i > 10) {
-            window.location.href = 'result.php';
-        }
-    }
-
-    window.onload = function () {
-        nextQuestion();
     };
-</script>
 
+            if (i === 0) {
+                xhttp.open("GET", "../include/fetchquestion.php?id=" + i, true);
+            } else {
+                xhttp.open("GET", "../include/fetchquestion.php?id=" + i, true);
+            }
+            xhttp.send();
+
+            i++;
+
+            if (i > 10) {
+                window.location.href = 'result.php';
+            }
+        }
+
+        window.onload = function () {
+            nextQuestion();
+        };
+    </script>
 
 
 </body>

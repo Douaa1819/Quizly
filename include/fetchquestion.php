@@ -1,12 +1,12 @@
-
 <?php
 require_once "../controller/questioncontroller.php";
-$i = $_GET['idQ'];
+$i = $_GET['id'];
 
 $objectQuestion = new QuestionControlle();
-$question = $objectQuestion->QuestionControlle();
-shuffle($question);
+$questions = $objectQuestion->QuestionControlle();
 
-echo '<h1>' . $question[$i]['theme'] . '</h1>';
-echo $question[$i]['idQ'] . "- " . $question[$i]['question'];
+echo '<h1>' . $questions[$i]['theme'] . '</h1>';
+echo $questions[$i]['idQ'] . "- " . $questions[$i]['question'];
 ?>
+
+

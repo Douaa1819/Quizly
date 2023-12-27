@@ -1,18 +1,26 @@
+
 <?php
 session_start();
 require_once "../controller/reponsecontroller.php";
-$idQ = $_GET['idQ'];
+$i = $_GET['id'];
 
 $objectReponse = new ReponsControlle();
-$reponse = $objectReponse->ReponseControlle($idQ);
+$reponse = $objectReponse->ReponseControlle($i);
+
+// Vérifiez si $_SESSION['user_responses'] est défini et est un tableau
+if (!isset($_SESSION['user_responses']) || !is_array($_SESSION['user_responses'])) {
+    $_SESSION['user_responses'] = array(); // Initialisez-le comme un tableau
+}
 
 if (isset($_GET['response'])) {
     $selectedResponse = $_GET['response'];
 
-    $_SESSION['user_responses'][$idQ] = $selectedResponse;
-    var_dump($idQ);
+    $_SESSION['user_responses'][$i] = $selectedResponse;
+    var_dump($_SESSION['user_responses']);
 }
 ?>
+<!-- Le reste de votre code HTML -->
+
 
 <div class="check-options" id='reponse'>
     <div class="left-radio">
